@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>商品列表</title>
+</head>
+<body>
+<div>
+    <button id="queryGoods">查询商品</button>
+    <table border="1px" id="goods_table">
+    </table>
+</div>
+
+<script src="jquery-3.2.1.min.js"></script>
+<script>
+    // 绑定按钮点击事件
+    $("#queryGoods").click(function () {
+        $.ajax({
+            type: 'post',
+            // 如果使用这种url写法，则不需要再写在data中
+            // url: '/test/getGoodsInfoByStatus?status=' + 1,
+            url: '/goods/getGoodsInfoByStatus',
+            dataType:'json',
+            data: JSON.stringify({"status": 1}),
+            contentType: "application/json; charset=utf-8",
+            success: function (result) {
+            showData(result);
+        },
+        //     success: function(result) {
+        //     console.log(result);
+        // },
+            error: function (e) {//响应不成功时返回的函数
+                console.log(e, 'error');
+            }
+        });
+    });
+
+    // 将数据渲染在表格中的方法
+    function showData(data) {
+        var table = $("#goods_table");
+        table.empty();
+        //拼接表头
+        table.append("<tr></tr><td>id</td><td>名称</td><td>价格</td><td>数量</td></tr>");
+        // $.each(data,function (i, value) {
+        //     //拼接表格的行和列
+        //     var str = "<tr><td>" + value.id + "</td><td>" + value.name + "</td><td>" + value.price + "</td><td>" + value.num + "</td></tr>";
+        //     //追加到table中
+        //     table.append(str);
+        // });
+        for (var i = 0; i < data.length; i++) {
+            //拼接表格的行和列
+            var str = "<tr><td>" + data[i].id + "</td><td>" + data[i].name + "</td><td>" + data[i].price + "</td><td>" + data[i].num + "</td></tr>";
+            //追加到table中
+            table.append(str);
+        }
+    }
+</script>
+</body>
+</html>
