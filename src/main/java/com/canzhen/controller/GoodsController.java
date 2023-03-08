@@ -31,6 +31,12 @@ public class GoodsController {
     @ResponseBody
     @RequestMapping(value = "/getGoodsInfoByStatus", method = RequestMethod.POST)
     public List<Goods> getGoodsInfoByStatus(@RequestBody JSONObject request) {
-        return goodsService.getGoodsInfoByStatus(request.getInteger("status"));
+        List<Goods> goods = goodsService.getGoodsInfoByStatus(1);
+        List<Goods> list = goodsService.getGoodsInfoByStatus(1);
+        Goods goods1 = new Goods();
+        goods1.setStatus(1);
+        goods1.setName("oygftrdctvghbnj");
+        goodsService.insert(goods1);
+        return goodsService.getGoodsInfoByStatus(1);
     }
 }

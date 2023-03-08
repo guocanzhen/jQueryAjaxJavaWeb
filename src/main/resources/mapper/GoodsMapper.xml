@@ -9,4 +9,17 @@
         STATUS = #{STATUS}
     </select>
 
+    <insert id="insert" parameterType="com.canzhen.bean.Goods">
+        INSERT INTO goods(name, price, num, status)
+        VALUES(#{name}, #{price}, #{num}, #{status});
+    </insert>
+
+    <update id="updateById" parameterType="com.canzhen.bean.Goods">
+        update goods
+        set name = #{name},
+            price = #{price},
+            num = #{num},
+            status = #{status}
+        where id = #{id}
+    </update>
 </mapper>

@@ -16,4 +16,14 @@ public class GoodsServiceImpl implements GoodsService {
     public List<Goods> getGoodsInfoByStatus(int status) {
         return goodsMapper.getGoodsInfoByStatus(status);
     }
+
+    @Override
+    public Boolean insert(Goods goods) {
+        return goodsMapper.insert(goods);
+    }
+
+    @Override
+    public Boolean updateById(Goods goods) {
+        return goodsMapper.updateById(goods);
+    }
 }
